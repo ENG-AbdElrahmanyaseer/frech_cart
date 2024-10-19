@@ -1,0 +1,134 @@
+
+<section class="py-4">
+<div class="row g-0">
+
+<div class="col-md-9">
+
+  <owl-carousel-o [options]="mianslidOptions">
+
+    <ng-template carouselSlide><img class="w-100" height="400" src="./assets/images/main-slider-1.jpeg" alt="slider-1"></ng-template>
+
+    <ng-template carouselSlide><img class="w-100" height="400" src="./assets/images/main-slider-2.jpeg" alt="slider-2"></ng-template>
+
+    <ng-template carouselSlide><img class="w-100" height="400" src="./assets/images/main-slider-3.jpeg" alt="slider-3"></ng-template>
+
+  </owl-carousel-o>
+
+</div>
+
+<div class="col-md-3">
+<img class="w-100" height="200" src="./assets/images/slide-1.jpeg" alt="">
+ 
+<img class="w-100" height="200" src="./assets/images/slide-2.jpeg" alt="">
+
+</div>
+
+</div>
+
+</section>
+
+<section class="py-4">
+    <h2>popular categories</h2>
+
+
+    
+    <owl-carousel-o [options]="categoriesOptions">
+  
+      <ng-container *ngFor="let slide of categoriesAray">
+        <ng-template carouselSlide >
+          <img height="300px"  [src]="slide.image" [alt]="slide.name" [title]="slide.name">
+          <h3 class="h6 text-main ">{{slide.name}}</h3>
+        </ng-template>
+      </ng-container>
+  
+    </owl-carousel-o>
+
+
+
+</section>
+
+<section class="py-4" *ngIf="Products.length > 0">
+
+<h2>popular product</h2>
+
+<input type="search" class="form-control w-50 mx-auto my-4" placeholder="search..." [(ngModel)]="term" >
+
+<div class="row g-4">
+
+
+    <div *ngFor=" let item of Products  |home:term |slice:19:37" class="col-sm-6 col-md-4 col-lg-3- col-xl-2">
+
+
+<div class="product h-100 ">
+<header role="button" [routerLink]="['/poroductDetalse',item._id]">
+  
+
+<img class="w-100" [src]="item.imageCover" [title]="item.title" [alt]="item.title">
+
+
+
+<h3 class="small">{{item.title |cutText:3}}</h3>
+
+<h4 class="text-main h6">{{item.category.name }}</h4>
+
+
+<div class="d-flex align-items-center justify-content-between small">
+
+    <span class=" ">{{item.price |currency:'EGP'}}</span>
+    <span> 
+        <i class="fas fa-star rating-color "></i>
+    
+        {{item.ratingsAverage}}
+    </span>
+</div>
+
+</header>
+<footer >
+  <button (click)="addProduct(item._id , btnAdd )" #btnAdd class="main-btn w-100 py-2"> +Add To Cart </button>
+</footer>
+
+</div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+        
+    </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>

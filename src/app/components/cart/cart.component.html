@@ -1,0 +1,52 @@
+<section *ngIf="cartDetals;else msg" class="w-75 mx-auto rounded shadow bg-mian-light p-3 "  >
+
+<div class="d-flex align-items-center justify-content-between">
+    <h1>Shop Cart</h1>
+    <button (click)="deletAllCart( )" class="btn btn-sm btn-outline-danger"> Clear cart </button>
+</div>
+
+
+    <p class="text-main"> Total Price : {{cartDetals.totalCartPrice}}</p>
+
+<div class="row border-bottom py-2" *ngFor="let item of cartDetals.products">
+
+    <div class="col-md-1">
+
+<img class="w-100" [src]="item.product.imageCover" [alt]="item.product.title">
+
+    </div>
+
+
+    <div class="col-md-11 d-flex justify-content-between align-items-center">
+
+
+<div >
+
+    <h3 class="h6"> {{item.product.title|cutText:7}}</h3>
+    <p class="text-main mb-0"> price :{{ item.price |currency:"EGP"}}</p>
+    <button #btnRemove (click)="RemoveCartItem(item.product._id , btnRemove)" class="btn m-0 p-0 text-main"><i class="fa-solid fa-trash-can"></i>Remove</button>
+</div>
+
+<div >  
+    <button #btn1 (click)="updateQuantity(item.count - 1 ,item.product._id ,btn1 ,btn2  )" class="btn btn-sm border-success">  -  </button>
+    
+    <span> {{item.count}} </span>
+
+    <button #btn2 (click)="updateQuantity(item.count + 1 ,item.product._id ,btn1 ,btn2 )" class="btn btn-sm border-success">  +  </button>
+</div>
+
+
+    </div>
+
+
+</div>
+<button [routerLink]="['/paymant',cartDetals._id]" class=" main-btn mt-4 ">OnlinePayMant <img src="./assets/images/visa-1.svg" alt="visa logo"></button>
+
+
+
+
+
+</section>
+
+<ng-template #msg><h2 class="text-main text-center"> Your Cart Is Empaty... </h2></ng-template>
+

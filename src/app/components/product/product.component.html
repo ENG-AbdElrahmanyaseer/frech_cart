@@ -1,0 +1,103 @@
+
+<section class="py-4" *ngIf="Products.length > 0">
+
+    <h2 class="text-center mb-5">All Product</h2>
+    
+    
+    <div class="row justify-content-center g-4">
+    
+    
+        <div *ngFor=" let item of Products  | paginate: { id: 'productPagenat',
+        itemsPerPage: pageSize,
+        currentPage: currentPage,
+        totalItems: total } " class="col-sm-6 col-md-4 col-lg-3- col-xl-2">
+    
+    
+    <div class="product h-100 ">
+    <header role="button" [routerLink]="['/poroductDetalse',item._id]">
+      
+    
+    <img class="w-100" [src]="item.imageCover" [title]="item.title" [alt]="item.title">
+    
+    
+    
+    <h3 class="small">{{item.title |cutText:3}}</h3>
+    
+    <h4 class="text-main h6">{{item.category.name }}</h4>
+    
+    
+    <div class="d-flex align-items-center justify-content-between small">
+    
+        <span class=" ">{{item.price |currency:'EGP'}}</span>
+        <span> 
+            <i class="fas fa-star rating-color "></i>
+        
+            {{item.ratingsAverage}}
+        </span>
+    </div>
+    
+    </header>
+    <footer >
+      <button (click)="addProduct(item._id , btnAdd )" #btnAdd class="main-btn w-100 py-2"> +Add To Cart </button>
+    </footer>
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+        </div>
+     
+    
+    
+
+<div class="d-flex justify-content-center my-4">        <pagination-controls  id="productPagenat"
+    (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)"
+    [maxSize]="9"
+    [directionLinks]="true"
+    [autoHide]="true"
+    [responsive]="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </section>
